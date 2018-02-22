@@ -1,0 +1,5 @@
+<p>
+    #set ($req = $test)
+
+</p>
+        $req
