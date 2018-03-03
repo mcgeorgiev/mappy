@@ -11,6 +11,7 @@ public class Map2D {
         maxTunnels = 50;
         maxLength = 8;
         position = new Location(width, height);
+        createArray();
     }
 
     private void createArray() {
@@ -31,7 +32,7 @@ public class Map2D {
         }
     }
 
-    public void create() {
+    private void create() {
 
         while ((maxTunnels != 0)) {
 
@@ -60,12 +61,10 @@ public class Map2D {
         return (new Random().nextInt(maxLength)+1);
     }
 
-    public static void main(String[] args) {
-        Map2D map = new Map2D(20, 20);
-        map.createArray();
-//        map.print();
-        map.create();
-        map.print();
+    public Integer[][] getMap() {
+        create();
+        print();
+        return map;
 
     }
 
