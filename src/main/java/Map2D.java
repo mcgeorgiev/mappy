@@ -34,6 +34,7 @@ public class Map2D {
     public void random() {
         position.setStartDirection();
         System.out.println(position.recentDirections.getLast());
+        System.out.println(position.getRandomDirection());
     }
 
     public static void main(String[] args) {

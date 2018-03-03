@@ -29,8 +29,8 @@ public class Location {
     public Direction getRandomDirection() {
         //perpendicular is left and right of the direction
         int currentIndex = Arrays.asList(directions).indexOf(recentDirections.getLast());
-        int leftOrRight = new Random().nextInt(perpendicularVector.length);
-        int newIndex = (leftOrRight + currentIndex) % directions.length;
+        int leftOrRight = perpendicularVector[new Random().nextInt(perpendicularVector.length)];
+        int newIndex = ((leftOrRight + currentIndex) % directions.length);
         return directions[newIndex];
     }
 
