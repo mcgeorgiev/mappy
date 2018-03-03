@@ -10,19 +10,23 @@ public class Location {
     private Direction[] directions;
 
     public Location(Integer mx, Integer mh) {
-        setRandom(mx, mh);
         directions = Direction.values();
         recentDirections = new LinkedList<Direction>();
+        setStartLocation(mx, mh);
+        setStartDirection();
     }
 
     public void move() {
-        // move a random direction if not same or opposite
+        // get
+        
+        // ensure not off edge
 
         // add new direction
+
         // set new x, y
     }
 
-    public void setStartDirection() {
+    private void setStartDirection() {
         recentDirections.add(directions[new Random().nextInt(directions.length)]);
     }
 
@@ -34,11 +38,18 @@ public class Location {
         return directions[newIndex];
     }
 
-
-
-    private void setRandom(Integer maxWidth, Integer maxHeight) {
-        Random rand = new Random();
-        Integer startX = rand.nextInt(maxWidth);
-        Integer startY = rand.nextInt(maxHeight);
+    private void setStartLocation(Integer mx, Integer my) {
+        x = new Random().nextInt(mx);
+        y = new Random().nextInt(my);
     }
+
+    public Integer X() {
+        return x;
+    }
+
+    public Integer Y() {
+        return y;
+    }
+
+
 }

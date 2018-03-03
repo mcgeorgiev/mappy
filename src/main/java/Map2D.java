@@ -31,17 +31,33 @@ public class Map2D {
         }
     }
 
-    public void random() {
-        position.setStartDirection();
-        System.out.println(position.recentDirections.getLast());
-        System.out.println(position.getRandomDirection());
+    public void create() {
+
+        while ((maxTunnels != 0) && (maxLength != 0)) {
+
+            int tunnelLength = 0;
+            int randomTunnelLength = getRandomTunnelLength();
+
+            // build tunnel
+            while (tunnelLength < randomTunnelLength) {
+               position.move();
+               map[position.Y()][position.X()] = 1;
+               tunnelLength++;
+
+            }
+
+        }
+    }
+
+    private int getRandomTunnelLength() {
+        return (new Random().nextInt(maxLength)+1);
     }
 
     public static void main(String[] args) {
         Map2D map = new Map2D(5, 5);
         map.createArray();
         map.print();
-        map.random();
+        map.create();
 
     }
 
