@@ -32,7 +32,8 @@ public class Map2D {
     }
 
     public void random() {
-        position.getRandomDirection();
+        position.setStartDirection();
+        System.out.println(position.recentDirections.getLast());
     }
 
     public static void main(String[] args) {

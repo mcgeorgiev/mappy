@@ -1,13 +1,18 @@
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Random;
-import java.util.Stack;
 
 public class Location {
 
     private Integer x, y;
-    private Stack<Direction> recentDirections;
+    public LinkedList<Direction> recentDirections;
+    private int[] perpendicularVector = {-1, 1};
+    private Direction[] directions;
 
     public Location(Integer mx, Integer mh) {
         setRandom(mx, mh);
+        directions = Direction.values();
+        recentDirections = new LinkedList<Direction>();
     }
 
     public void move() {
@@ -17,13 +22,19 @@ public class Location {
         // set new x, y
     }
 
-    public Direction getRandomDirection() {
-        Direction[] directions = Direction.values();
-        for (Direction d: directions) {
-            System.out.println(d);
-        }
-        return null;
+    public void setStartDirection() {
+        recentDirections.add(directions[new Random().nextInt(directions.length)]);
     }
+
+    public Direction getRandomDirection() {
+        //perpendicular is left and right of the direction
+        int currentIndex = Arrays.asList(directions).indexOf(recentDirections.getLast());
+        int leftOrRight = new Random().nextInt(perpendicularVector.length);
+        int newIndex = (leftOrRight + currentIndex) % directions.length;
+        return directions[newIndex];
+    }
+
+
 
     private void setRandom(Integer maxWidth, Integer maxHeight) {
         Random rand = new Random();
