@@ -8,8 +8,8 @@ public class Map2D {
     public Map2D (Integer w,Integer h) {
         width = w;
         height = h;
-        maxTunnels = 3;
-        maxLength = 3;
+        maxTunnels = 50;
+        maxLength = 8;
         position = new Location(width, height);
     }
 
@@ -33,18 +33,25 @@ public class Map2D {
 
     public void create() {
 
-        while ((maxTunnels != 0) && (maxLength != 0)) {
+        while ((maxTunnels != 0)) {
 
             int tunnelLength = 0;
             int randomTunnelLength = getRandomTunnelLength();
+//            System.out.println("Tunnel Length "+ randomTunnelLength);
 
-            // build tunnel
+            position.newDirection();
+            System.out.println(position.recentDirections.getLast() + ": " + randomTunnelLength);
             while (tunnelLength < randomTunnelLength) {
-               position.move();
-               map[position.Y()][position.X()] = 1;
-               tunnelLength++;
-
+               if (position.inBounds()) {
+                   position.move();
+                   map[position.Y()][position.X()] = 0;
+                   tunnelLength++;
+               } else {
+                   break;
+               }
             }
+
+            maxTunnels --;
 
         }
     }
@@ -54,10 +61,11 @@ public class Map2D {
     }
 
     public static void main(String[] args) {
-        Map2D map = new Map2D(5, 5);
+        Map2D map = new Map2D(20, 20);
         map.createArray();
-        map.print();
+//        map.print();
         map.create();
+        map.print();
 
     }
 

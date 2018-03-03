@@ -1,3 +1,4 @@
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
@@ -8,39 +9,52 @@ public class Location {
     public LinkedList<Direction> recentDirections;
     private int[] perpendicularVector = {-1, 1};
     private Direction[] directions;
+    private Integer maxX, maxY;
 
-    public Location(Integer mx, Integer mh) {
+    public Location(Integer mx, Integer my) {
+        maxX = mx;
+        maxY = my;
+
         directions = Direction.values();
         recentDirections = new LinkedList<Direction>();
-        setStartLocation(mx, mh);
+        setStartLocation();
         setStartDirection();
     }
 
     public void move() {
-        // get
-        
-        // ensure not off edge
 
-        // add new direction
+        x += recentDirections.getLast().X();
+        y += recentDirections.getLast().Y();
+    }
 
-        // set new x, y
+    public boolean inBounds() {
+        int potentialX = recentDirections.getLast().X() + x;
+        int potentialY = recentDirections.getLast().Y() + y;
+
+       return !((potentialX < 0) || (potentialX >= maxX ) || (potentialY < 0)  || (potentialY >= maxY));
     }
 
     private void setStartDirection() {
         recentDirections.add(directions[new Random().nextInt(directions.length)]);
     }
 
-    public Direction getRandomDirection() {
+    public void newDirection() {
+        recentDirections.add(getRandomDirection());
+    }
+
+    private Direction getRandomDirection() {
         //perpendicular is left and right of the direction
         int currentIndex = Arrays.asList(directions).indexOf(recentDirections.getLast());
         int leftOrRight = perpendicularVector[new Random().nextInt(perpendicularVector.length)];
-        int newIndex = ((leftOrRight + currentIndex) % directions.length);
+        int newIndex = Math.floorMod((leftOrRight + currentIndex), directions.length);
+
+//        System.out.println("Current: " + currentIndex + ", Move: " + leftOrRight + ", New: " + newIndex);
         return directions[newIndex];
     }
 
-    private void setStartLocation(Integer mx, Integer my) {
-        x = new Random().nextInt(mx);
-        y = new Random().nextInt(my);
+    private void setStartLocation() {
+        x = new Random().nextInt(maxX);
+        y = new Random().nextInt(maxY);
     }
 
     public Integer X() {
