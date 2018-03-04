@@ -8,11 +8,11 @@ public class Map2D {
     Integer[][] map;
     Location position;
 
-    public Map2D (Integer w,Integer h) {
+    public Map2D (Integer w,Integer h, Integer mt, Integer ml) {
         width = w;
         height = h;
-        maxTunnels = 50;
-        maxLength = 8;
+        maxTunnels = mt;
+        maxLength = ml;
         position = new Location(width, height);
         createArray();
     }
@@ -44,7 +44,7 @@ public class Map2D {
 //            System.out.println("Tunnel Length "+ randomTunnelLength);
 
             position.newDirection();
-            System.out.println(position.recentDirections.getLast() + ": " + randomTunnelLength);
+//            System.out.println(position.recentDirections.getLast() + ": " + randomTunnelLength);
             while (tunnelLength < randomTunnelLength) {
                if (position.inBounds()) {
                    position.move();
@@ -66,7 +66,7 @@ public class Map2D {
 
     public JSONArray getMap() {
         create();
-        print();
+//        print();
         return new JSONArray(Arrays.asList(map));
 
 

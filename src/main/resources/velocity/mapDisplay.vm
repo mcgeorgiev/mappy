@@ -1,5 +1,26 @@
 <p>
-    #set ($req = $test)
+    #set ($req = $map)
 
 </p>
         $req
+
+<form method="get" action="/hello">
+
+    <input type="range" id="width" name="widthInput" min="0" max="50" value="0"
+           oninput="widthOut.value=widthInput.value">
+    <output id="widthOut" name="amount" for="width">0</output>
+
+    <input type="range" id="height" name="heightInput" min="0" max="50" value="0"
+           oninput="heightOut.value=heightInput.value">
+    <output id="heightOut" name="amount" for="height">0</output>
+
+    <input type="range" id="tunnels" name="tunnelsInput" min="0" max="50" value="0"
+           oninput="tunnelsOut.value=tunnelsInput.value">
+    <output id="tunnelsOut" name="amount" for="tunnels">0</output>
+
+    <input type="range" id="length" name="lengthInput" min="0" max="50" value="0"
+           oninput="lengthOut.value=lengthInput.value">
+    <output id="lengthOut" name="amount" for="length">0</output>
+
+    <button type="submit">Search</button>
+</form>
