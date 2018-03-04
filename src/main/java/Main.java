@@ -1,4 +1,6 @@
 import static spark.Spark.get;
+
+import org.json.JSONArray;
 import spark.Request;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,8 +13,11 @@ public class Main {
     }
 
     private static String renderMap(Request req) {
+        Map2D map = new Map2D(20, 20);
+        JSONArray arrayMap = map.getMap();
+
         Map<String, Object> model = new HashMap();
-        model.put("test", "hi");
+        model.put("test", arrayMap);
         return renderTemplate("velocity/mapDisplay.vm", model);
     }
 

@@ -1,3 +1,6 @@
+import org.json.JSONArray;
+
+import java.util.Arrays;
 import java.util.Random;
 
 public class Map2D {
@@ -61,10 +64,11 @@ public class Map2D {
         return (new Random().nextInt(maxLength)+1);
     }
 
-    public Integer[][] getMap() {
+    public JSONArray getMap() {
         create();
         print();
-        return map;
+        return new JSONArray(Arrays.asList(map));
+
 
     }
 
